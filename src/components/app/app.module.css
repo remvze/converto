@@ -78,7 +78,10 @@
       }
 
       & select {
+        display: block;
         width: 120px;
+        min-width: 120px;
+        max-width: 120px;
         height: 100%;
         font-size: var(--font-sm);
         font-weight: 500;
