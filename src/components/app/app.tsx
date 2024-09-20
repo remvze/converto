@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Container } from '../container';
 
@@ -48,6 +48,10 @@ export function App() {
     setUnit2(defaultUnit2);
     setValue2(convert(value1, defaultUnit1, defaultUnit2, newCategory));
   };
+
+  useEffect(() => {
+    setValue2(convert(value1, unit1, unit2, category));
+  }, [category, unit1, unit2]);
 
   return (
     <Container>
