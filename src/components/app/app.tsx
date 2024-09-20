@@ -5,6 +5,7 @@ import { Container } from '../container';
 import { unitsData, convert, formatUnit } from '@/lib/units';
 
 import styles from './app.module.css';
+import { cn } from '@/helpers/styles';
 
 export function App() {
   const [value1, setValue1] = useState(1);
@@ -61,7 +62,7 @@ export function App() {
           </select>
         </div>
 
-        <div className={styles.unit}>
+        <div className={cn(styles.unit, styles.one)}>
           <input type="number" value={value1} onChange={handleValue1Change} />
 
           <select value={unit1} onChange={handleUnit1Change}>
@@ -79,7 +80,7 @@ export function App() {
           <div />
         </div>
 
-        <div className={styles.unit}>
+        <div className={cn(styles.unit, styles.two)}>
           <input type="number" value={value2} onChange={handleValue2Change} />
 
           <select value={unit2} onChange={handleUnit2Change}>
