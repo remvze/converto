@@ -64,17 +64,50 @@
         bottom: -1px;
       }
 
-      & input {
+      & .inputWrapper {
+        display: flex;
         flex-grow: 1;
-        min-width: 0;
+        align-items: center;
         height: 100%;
-        padding: 0 12px;
-        font-family: var(--font-mono);
-        color: var(--color-foreground-subtle);
+        padding: 8px;
+        padding-left: 0;
         background-color: var(--color-neutral-50);
         border: 1px solid var(--color-neutral-200);
         border-radius: 8px;
-        outline: none;
+
+        & input {
+          flex-grow: 1;
+          width: 100%;
+          min-width: 0;
+          height: 100%;
+          padding: 0 12px;
+          font-family: var(--font-mono);
+          color: var(--color-foreground-subtle);
+          background-color: transparent;
+          border: none;
+          outline: none;
+        }
+
+        & button {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+          aspect-ratio: 1 / 1;
+          font-size: var(--font-xsm);
+          color: var(--color-foreground-subtle);
+          cursor: pointer;
+          background-color: var(--color-neutral-100);
+          border: none;
+          border-radius: 4px;
+          outline: none;
+          transition: 0.2s;
+
+          &:hover {
+            color: var(--color-foreground);
+            background-color: var(--color-neutral-200);
+          }
+        }
       }
 
       & select {

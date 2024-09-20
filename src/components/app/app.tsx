@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
+import { FaRegCopy, FaCheck } from 'react-icons/fa6';
 
 import { Container } from '../container';
 
+import { useCopy } from '@/hooks/use-copy';
 import { unitsData, convert, formatUnit } from '@/lib/units';
+import { cn } from '@/helpers/styles';
 
 import styles from './app.module.css';
-import { cn } from '@/helpers/styles';
 
 export function App() {
   const [value1, setValue1] = useState(1);
@@ -13,6 +15,9 @@ export function App() {
   const [value2, setValue2] = useState(1);
   const [unit2, setUnit2] = useState('kilometers');
   const [category, setCategory] = useState('length');
+
+  const { copy: copyUnit1, copying: copyingUnit1 } = useCopy();
+  const { copy: copyUnit2, copying: copyingUnit2 } = useCopy();
 
   const handleValue1Change = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseFloat(e.target.value);
@@ -67,7 +72,13 @@ export function App() {
         </div>
 
         <div className={cn(styles.unit, styles.one)}>
-          <input type="number" value={value1} onChange={handleValue1Change} />
+          <div className={styles.inputWrapper}>
+            <input type="number" value={value1} onChange={handleValue1Change} />
+
+            <button onClick={() => copyUnit1(value1)}>
+              {copyingUnit1 ? <FaCheck /> : <FaRegCopy />}
+            </button>
+          </div>
 
           <select value={unit1} onChange={handleUnit1Change}>
             {Object.keys(unitsData[category]).map(unit => (
@@ -85,7 +96,13 @@ export function App() {
         </div>
 
         <div className={cn(styles.unit, styles.two)}>
-          <input type="number" value={value2} onChange={handleValue2Change} />
+          <div className={styles.inputWrapper}>
+            <input type="number" value={value2} onChange={handleValue2Change} />
+
+            <button onClick={() => copyUnit2(value2)}>
+              {copyingUnit2 ? <FaCheck /> : <FaRegCopy />}
+            </button>
+          </div>
 
           <select value={unit2} onChange={handleUnit2Change}>
             {Object.keys(unitsData[category]).map(unit => (
