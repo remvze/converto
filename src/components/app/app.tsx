@@ -75,7 +75,7 @@ export function App() {
           <div className={styles.inputWrapper}>
             <input type="number" value={value1} onChange={handleValue1Change} />
 
-            <button onClick={() => copyUnit1(value1)}>
+            <button onClick={() => copyUnit1(value1.toString())}>
               {copyingUnit1 ? <FaCheck /> : <FaRegCopy />}
             </button>
           </div>
@@ -99,7 +99,7 @@ export function App() {
           <div className={styles.inputWrapper}>
             <input type="number" value={value2} onChange={handleValue2Change} />
 
-            <button onClick={() => copyUnit2(value2)}>
+            <button onClick={() => copyUnit2(value2.toString())}>
               {copyingUnit2 ? <FaCheck /> : <FaRegCopy />}
             </button>
           </div>
