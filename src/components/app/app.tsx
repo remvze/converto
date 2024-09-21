@@ -113,6 +113,17 @@ export function App() {
           </select>
         </div>
       </form>
+      <p className={styles.donate}>
+        Support us with a{' '}
+        <a
+          href="https://buymeacoffee.com/remvze"
+          rel="noreferrer"
+          target="_blank"
+        >
+          donation
+        </a>
+        !
+      </p>
     </Container>
   );
 }
