@@ -9,6 +9,11 @@ interface UnitsData {
 type UnitCategory = keyof UnitsData;
 
 const unsortedUnitsData: UnitsData = {
+  angle: {
+    degrees: Math.PI / 180,
+    gradians: Math.PI / 200,
+    radians: 1,
+  },
   area: {
     acres: 4046.86,
     hectares: 10000,
@@ -21,6 +26,34 @@ const unsortedUnitsData: UnitsData = {
     square_millimeters: 1e-6,
     square_yards: 0.836127,
   },
+  data_storage: {
+    bits: 1e-6,
+    bytes: 8e-6,
+    gigabytes: 8e3,
+    kilobytes: 8e-3,
+    megabytes: 8,
+    petabytes: 8e9,
+    terabytes: 8e6,
+  },
+  energy: {
+    calories: 4.184,
+    joules: 1,
+    kilocalories: 4184,
+    kilojoules: 1e3,
+    kilowatt_hours: 3.6e6,
+    watt_hours: 3600,
+  },
+  force: {
+    kilonewtons: 1e3,
+    newtons: 1,
+    pounds_force: 4.44822,
+  },
+  frequency: {
+    gigahertz: 1e9,
+    hertz: 1,
+    kilohertz: 1e3,
+    megahertz: 1e6,
+  },
   length: {
     centimeters: 0.01,
     feet: 0.3048,
@@ -31,6 +64,18 @@ const unsortedUnitsData: UnitsData = {
     millimeters: 0.001,
     nautical_miles: 1852,
     yards: 0.9144,
+  },
+  power: {
+    horsepower: 745.7,
+    kilowatts: 1e3,
+    megawatts: 1e6,
+    watts: 1,
+  },
+  pressure: {
+    atmospheres: 101325,
+    bars: 1e5,
+    pascals: 1,
+    psi: 6894.76,
   },
   speed: {
     feet_per_second: 0.3048,
@@ -46,17 +91,14 @@ const unsortedUnitsData: UnitsData = {
       } else if (toUnit === 'kelvin') {
         return value + 273.15;
       }
-
       return value;
     },
-
     fahrenheit: (value: number, toUnit: string): number => {
       if (toUnit === 'celsius') {
         return (value - 32) * (5 / 9);
       } else if (toUnit === 'kelvin') {
         return (value - 32) * (5 / 9) + 273.15;
       }
-
       return value;
     },
     kelvin: (value: number, toUnit: string): number => {
@@ -65,7 +107,6 @@ const unsortedUnitsData: UnitsData = {
       } else if (toUnit === 'fahrenheit') {
         return (value - 273.15) * (9 / 5) + 32;
       }
-
       return value;
     },
   },
