@@ -1,0 +1,47 @@
+---
+import { Container } from './container';
+---
+
+<Container>
+  <footer class="footer">
+    <p>
+      Created by <a
+        href="https://x.com/remvze"
+        rel="noreferrer"
+        target="_blank"
+      >
+        Maze
+      </a>
+    </p>
+    <p>
+      Check on <a
+        href="https://github.com/remvze/converto"
+        rel="noreferrer"
+        target="_blank"
+      >
+        GitHub
+      </a>
+    </p>
+  </footer>
+</Container>
+
+<style>
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 0;
+    border-top: 1px dashed var(--color-neutral-100);
+
+    & p {
+      font-size: var(--font-xsm);
+      color: var(--color-foreground-subtle);
+
+      & a {
+        font-weight: 500;
+        color: var(--color-foreground);
+        text-decoration: none;
+      }
+    }
+  }
+</style>
