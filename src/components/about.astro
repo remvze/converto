@@ -1,0 +1,43 @@
+---
+import { Container } from './container';
+---
+
+<Container>
+  <section class="about">
+    <h2>No-Nonsense Conver<span>sions</span></h2>
+    <p>
+      Say goodbye to confusing conversion tools. Converto offers a
+      straightforward way to switch between units like inches and centimeters or
+      ounces and grams. It&apos;s designed for anyone who needs reliable
+      conversions done quickly and without any extra steps.
+    </p>
+  </section>
+</Container>
+
+<style>
+  .about {
+    padding: 50px 0;
+
+    & h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--color-foreground);
+
+      & span {
+        background: linear-gradient(
+          135deg,
+          var(--color-foreground),
+          var(--color-foreground-subtler)
+        );
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    & p {
+      margin-top: 12px;
+      line-height: 1.6;
+      color: var(--color-foreground-subtle);
+    }
+  }
+</style>
