@@ -1,4 +1,14 @@
-export const unitsData = {
+type UnitConversionFunction = (value: number, toUnit: string) => number;
+
+interface UnitsData {
+  [key: string]: {
+    [key: string]: number | UnitConversionFunction;
+  };
+}
+
+type UnitCategory = keyof UnitsData;
+
+const unsortedUnitsData: UnitsData = {
   area: {
     acres: 4046.86,
     hectares: 10000,
@@ -30,7 +40,7 @@ export const unitsData = {
     miles_per_hour: 0.44704,
   },
   temperature: {
-    celsius: (value, toUnit) => {
+    celsius: (value: number, toUnit: string): number => {
       if (toUnit === 'fahrenheit') {
         return (value * 9) / 5 + 32;
       } else if (toUnit === 'kelvin') {
@@ -40,7 +50,7 @@ export const unitsData = {
       return value;
     },
 
-    fahrenheit: (value, toUnit) => {
+    fahrenheit: (value: number, toUnit: string): number => {
       if (toUnit === 'celsius') {
         return (value - 32) * (5 / 9);
       } else if (toUnit === 'kelvin') {
@@ -49,7 +59,7 @@ export const unitsData = {
 
       return value;
     },
-    kelvin: (value, toUnit) => {
+    kelvin: (value: number, toUnit: string): number => {
       if (toUnit === 'celsius') {
         return value - 273.15;
       } else if (toUnit === 'fahrenheit') {
@@ -93,22 +103,57 @@ export const unitsData = {
   },
 };
 
+export const sortUnitsBySize = (unitsData: UnitsData): UnitsData => {
+  const sortedData: UnitsData = {};
+
+  Object.keys(unitsData).forEach(category => {
+    const categoryData = unitsData[category as UnitCategory];
+
+    if (category === 'temperature') {
+      sortedData[category] = categoryData;
+    } else {
+      const sortedUnits = Object.entries(categoryData)
+        .filter(([, value]) => typeof value === 'number')
+        .sort(
+          ([, valueA], [, valueB]) => (valueA as number) - (valueB as number),
+        )
+        .reduce(
+          (acc, [unit, value]) => {
+            acc[unit] = value as number;
+            return acc;
+          },
+          {} as { [key: string]: number },
+        );
+
+      sortedData[category] = sortedUnits;
+    }
+  });
+
+  return sortedData;
+};
+
+// Example usage:
+export const unitsData = sortUnitsBySize(unsortedUnitsData);
+
 export const convert = (
   value: number,
   fromUnit: string,
   toUnit: string,
-  category: string,
-) => {
+  category: keyof UnitsData,
+): number => {
   if (category === 'temperature') {
-    return unitsData[category][fromUnit](value, toUnit);
+    const conversionFunction = unitsData[category][
+      fromUnit
+    ] as UnitConversionFunction;
+    return conversionFunction(value, toUnit);
   } else {
-    const conversionFactorFrom = unitsData[category][fromUnit];
-    const conversionFactorTo = unitsData[category][toUnit];
+    const conversionFactorFrom = unitsData[category][fromUnit] as number;
+    const conversionFactorTo = unitsData[category][toUnit] as number;
     return (value * conversionFactorFrom) / conversionFactorTo;
   }
 };
 
-export const formatUnit = unit => {
+export const formatUnit = (unit: string): string => {
   return unit
     .replace(/_/g, ' ')
     .split(' ')
