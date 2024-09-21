@@ -1,16 +1,56 @@
 ---
+import { pick, pickMany } from '@/helpers/random';
 import { Container } from './container';
+
+import { unitsData, formatUnit } from '@/lib/units';
+
+const categories = Object.keys(unitsData).length;
+
+const units = Object.keys(unitsData).reduce((prev, curr) => {
+  return prev + Object.keys(unitsData[curr]).length;
+}, 0);
+
+const conversions = Object.keys(unitsData).reduce((prev, curr) => {
+  const units = Object.keys(unitsData[curr]).length;
+
+  return prev + units * (units - 1);
+}, 0);
+
+const examples = new Array(12).fill(null).map(() => {
+  const category = pick(Object.keys(unitsData));
+  const [unit1, unit2] = pickMany(Object.keys(unitsData[category]), 2);
+
+  return [formatUnit(unit1), formatUnit(unit2)];
+});
 ---
 
 <Container>
   <section class="about">
-    <h2>No-Nonsense Conver<span>sions</span></h2>
-    <p>
+    <h2 class="title">No-Nonsense Conver<span>sions</span></h2>
+    <p class="text">
       Say goodbye to confusing conversion tools. Converto offers a
       straightforward way to switch between units like inches and centimeters or
       ounces and grams. It&apos;s designed for anyone who needs reliable
       conversions done quickly and without any extra steps.
     </p>
+
+    <h2 class="title">Countless Conver<span>sions</span></h2>
+    <p class="stats">
+      <span>{categories}</span> Categories — <span>{units}</span> Units — <span
+        >{conversions}</span
+      > Conversions.
+    </p>
+    <div class="examples">
+      {
+        examples.map(([unit1, unit2]) => (
+          <div>
+            <span>{unit1}</span> to <span>{unit2}</span>
+          </div>
+        ))
+      }
+
+      <div>And <span>More</span>...</div>
+    </div>
   </section>
 </Container>
 
@@ -18,7 +58,7 @@ import { Container } from './container';
   .about {
     padding: 50px 0;
 
-    & h2 {
+    & .title {
       font-family: var(--font-display);
       font-weight: 700;
       color: var(--color-foreground);
@@ -34,10 +74,47 @@ import { Container } from './container';
       }
     }
 
-    & p {
+    & .text {
       margin-top: 12px;
+      margin-bottom: 32px;
       line-height: 1.6;
       color: var(--color-foreground-subtle);
+    }
+
+    & .stats {
+      margin-top: 12px;
+      font-size: var(--font-sm);
+      line-height: 1.6;
+      color: var(--color-foreground-subtle);
+
+      & span {
+        font-family: var(--font-mono);
+        color: var(--color-foreground);
+      }
+    }
+
+    & .examples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+
+      & div {
+        padding: 12px;
+        font-size: var(--font-2xsm);
+        color: var(--color-foreground-subtle);
+        background: linear-gradient(
+          90deg,
+          var(--color-neutral-100),
+          transparent
+        );
+        border: 1px solid var(--color-neutral-100);
+        border-radius: 1000px;
+
+        & span {
+          color: var(--color-foreground);
+        }
+      }
     }
   }
 </style>
