@@ -26,6 +26,10 @@ const unsortedUnitsData: UnitsData = {
     square_millimeters: 1e-6,
     square_yards: 0.836127,
   },
+  css_units: {
+    pixels: 1,
+    rem: 16,
+  },
   data_storage: {
     bits: 1e-6,
     bytes: 8e-6,
