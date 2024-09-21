@@ -1,0 +1,38 @@
+---
+import { Container } from './container';
+---
+
+<Container>
+  <section class="hero">
+    <h1>Conv<span>erto</span></h1>
+    <p>Dead simple unit converter.</p>
+  </section>
+</Container>
+
+<style>
+  .hero {
+    padding: 100px 0 40px;
+
+    & h1 {
+      font-family: var(--font-display);
+      font-size: var(--font-md);
+      font-weight: 700;
+      color: var(--color-foreground);
+
+      & span {
+        background: linear-gradient(
+          135deg,
+          var(--color-foreground),
+          var(--color-foreground-subtler)
+        );
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    & p {
+      margin-top: 4px;
+      color: var(--color-foreground-subtle);
+    }
+  }
+</style>
