@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://converto.fyi/sitemap-index.xml
+Sitemap: https://converto.mvze.net/sitemap-index.xml
