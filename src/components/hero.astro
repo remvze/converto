@@ -4,6 +4,7 @@ import { Container } from './container';
 
 <Container>
   <section class="hero">
+    <img alt="Converto Logo" class="logo" src="/logo.svg" />
     <h1>Conv<span>erto</span></h1>
     <p>Dead simple unit converter.</p>
   </section>
@@ -12,10 +13,18 @@ import { Container } from './container';
 <style>
   .hero {
     padding: 100px 0 40px;
+    text-align: center;
+
+    .logo {
+      display: block;
+      height: 40px;
+      margin: 0 auto 12px;
+      opacity: 0.85;
+    }
 
     & h1 {
       font-family: var(--font-display);
-      font-size: var(--font-md);
+      font-size: var(--font-lg);
       font-weight: 700;
       color: var(--color-foreground);
 
