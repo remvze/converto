@@ -177,7 +177,6 @@ export const sortUnitsBySize = (unitsData: UnitsData): UnitsData => {
   return sortedData;
 };
 
-// Example usage:
 export const unitsData = sortUnitsBySize(unsortedUnitsData);
 
 export const convert = (
